@@ -14,4 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('pages', 'Web\PagesController@index');
+Route::group(['namespace'=>'Web'], function(){
+	Route::get('pages', [
+			'uses'=>'PagesController@index',
+			'as'=>'index'
+	]);
+	Route::get('about', [
+		'uses'=>'PagesController@about'
+	]);
+	Route::get('contact', [
+		'uses'=>'PagesController@contact'
+	]);
+	Route::post('contact', [
+		'uses'=>'PagesController@sendEmail',
+		'as'=>'email.send'
+	]);
+});
