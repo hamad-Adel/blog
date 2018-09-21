@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.dashboard');
 });
 Route::group(['namespace'=>'Web'], function(){
 	Route::get('pages', [
@@ -30,3 +30,8 @@ Route::group(['namespace'=>'Web'], function(){
 		'as'=>'email.send'
 	]);
 });
+Route::resource('posts', 'Web\PostController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
